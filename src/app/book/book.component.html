@@ -1,0 +1,32 @@
+<h6 class="text-info text-center display-1">{{ titlePage }}</h6>
+
+<div  class="container align-content-center">
+  <app-search></app-search>
+</div>
+
+<div class="container border border-warning" *ngIf="selectedBook">
+ <div class="justify-content-center">
+    <h5 class="text-center text-danger">En savoir plus sur: {{selectedBook.title}}</h5>
+    <h5 class="text-center text-success">Nom de l'auteur: {{selectedBook.name}}, Description: {{selectedBook.description}}.</h5>
+  </div>
+  <app-bookdetails></app-bookdetails>
+</div>
+
+<div class="container">
+  <ul *ngIf="books" class="list-inline">
+    <li class="list-inline-item border border-primary" *ngFor="let book of books">
+      <span class="badge badge-info">{{ book.id }}</span>
+      <div class="text-primary lead">{{ book.name }}</div>
+      <div class="text-warning display-4">{{ book.title }}</div>
+      <div class="font-italic">{{ book.description }}</div>
+      <div class="card btn-dark btn-sm text-success" (click)="onSelect(book)">Sélectionner</div>
+    </li>
+  </ul>
+
+  <div  class="col-sm-4 video">
+    <div class="container" *ngIf="loggedIn===true">
+      <div class="card btn-dark btn-sm text-success" (click)="createBook()">Créer un nouveau Livre.</div>
+    </div>
+    <app-bookdetails [book]="selectedBook"></app-bookdetails>
+  </div>
+</div>

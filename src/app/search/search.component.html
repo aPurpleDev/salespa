@@ -1,0 +1,11 @@
+<form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit(formSearch)" #formSearch="ngForm">
+  <input name="word" ngModel required  class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
+  <button [disabled]="formSearch.invalid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+</form>
+<div class="container" *ngIf="result">
+  <div class="justify-content-center">
+    <h5 class="text-center text-danger">Résultat de la recherche pour {{formSearch.value['word']}}</h5>
+    <h5 class="text-center text-success">Un livre trouvé, nom: {{result.title}}, de l'auteur: {{result.name}}.</h5>
+  </div>
+</div>
+<div class="container" *ngIf="!result && formSearch.value['word']">Aucun résultat trouvé pour la recherche</div>
