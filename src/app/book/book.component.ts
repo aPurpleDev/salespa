@@ -22,6 +22,7 @@ export class BookComponent implements OnInit {
   newID = new FormControl('');
   newRef = new FormControl('');
   newDescription = new FormControl('');
+  isToUpdate: boolean = false;
 
   constructor() { }
 
@@ -56,5 +57,16 @@ export class BookComponent implements OnInit {
   selectedBook.title = this.newTitle.value;
   selectedBook.ref = this.newRef.value;
   selectedBook.description = this.newDescription.value;
+  }
+
+  toggleUpdate()
+  {
+    if(this.isToUpdate === false)
+    {
+      this.isToUpdate = true;
+    }else{
+      this.isToUpdate = false;
+    }
+    console.log(this.isToUpdate);
   }
 }

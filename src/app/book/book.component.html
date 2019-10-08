@@ -55,14 +55,17 @@
     <p>{{book.ref}}</p>
     <p class="lead">
       <a class="btn btn-primary btn-lg btn-space" (click)="onSelect(book)">Sélectionner</a>
-      <a class="btn btn-primary btn-lg btn-space" *ngIf="loggedIn===true"
-         (click)="editBook(selectedBook,newID,newName,newTitle,newRef,newDescription)">Editer</a>
       <a class="btn btn-primary btn-lg btn-space" *ngIf="loggedIn===true" (click)="onDelete(book)">Supprimer</a>
     </p>
   </div>
 </div>
 
-<div class="card align-content-center" *ngIf="loggedIn===true">
+<div class="text-center">
+<button type="submit" class="btn btn-large btn-success align-content-center" *ngIf="loggedIn===true" (click)="toggleUpdate()">Activer la création de nouveaux livres</button>
+</div>
+
+<div class="text-center">
+<div class="card align-content-center" *ngIf="loggedIn===true && isToUpdate===true">
   <form>
     <div class="form-group form-horizontal">
       <label>ID</label>
@@ -85,9 +88,10 @@
       <input type="text" [formControl]="newDescription">
     </div>
     <button type="submit" class="btn btn-success" (click)="createBook(newID,newName,newTitle,newRef,newDescription)">
-      Ajouter un nouveau livre
+      Ajouter le nouveau livre
     </button>
   </form>
+</div>
 </div>
 
 
