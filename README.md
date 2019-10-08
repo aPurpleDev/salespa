@@ -1,6 +1,17 @@
-# Salespa
+# Salespa //(named the bookStore)
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.3.4.
+
+# Overview
+
+This online bookstore is a single page application emulating a library e-commerce.
+
+# Features
+
+Login with Facebook (necessary to log-in, if a user wants to registrate he needs to create a Facebook account. This was due to time contraints.
+CRUD of Books (if logged, if not logged only Read is available).
+Hidden objects for unlogged users.
+Single Page Application fully made with Angular 8.
 
 ## Development server
 
