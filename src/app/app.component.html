@@ -1,37 +1,46 @@
 <div class="example-container mat-elevation-z8">
   <mat-card class="example-card">
     <mat-card-header>
-      <mat-card-title><h2>Bienvenue <span *ngIf="loggedIn===true">{{user.firstName}} {{user.lastName}}, </span> à theBookStore</h2></mat-card-title>
+      <mat-card-title>
+        <h2>Bienvenue <span *ngIf="loggedIn===true">{{user.firstName}} {{user.lastName}}, </span> au
+          <div class="text-black-50 display-4">BookStore</div>
+        </h2>
+      </mat-card-title>
       <mat-card-subtitle>
-        <button type="button" (click)="signInWithFB()" *ngIf="loggedIn===false" mat-flat-button color="primary">Se connecter via Facebook</button>
-        <button type="button" (click)="signOut()" *ngIf="loggedIn===true" mat-flat-button color="primary">Se déconnecter via Facebook</button>
+        <p class="text-dark">Connectez-vous pour accéder à toutes les fonctionnalités</p>
+        <div class="btn-group" role="group">
+          <button type="button" class="btn btn-space" (click)="signInWithFB()" *ngIf="loggedIn===false" mat-flat-button
+                  color="primary">Se
+            connecter via Facebook
+          </button>
+          <button type="button" class="btn btn-space" onclick="window.location.href = 'https://www.facebook.com/';"
+                  *ngIf="loggedIn===false" mat-flat-button color="primary">Créer un compte sur Facebook
+          </button>
+          <button type="button" (click)="signOut()" *ngIf="loggedIn===true" mat-flat-button color="primary">Se
+            déconnecter
+            via Facebook
+          </button>
+          <app-search></app-search>
+        </div>
+        <div class="float-center" *ngIf="loggedIn===true">
+          <hr>
+          <mat-card-subtitle class="text-black-50">Connecté en tant que {{user.firstName}} {{user.lastName}} avec accès
+            aux livres exclusifs
+          </mat-card-subtitle>
+          <img class="img-thumbnail" [src]="user.photoUrl" alt="Facebook Photo">
+        </div>
       </mat-card-subtitle>
     </mat-card-header>
   </mat-card>
-  <mat-card class="example-card" *ngIf="loggedIn===true">
-    <mat-card-header>
-      <mat-card-title><h2>Votre profil utilisateur:</h2></mat-card-title>
-      <mat-card-subtitle>Nom complet: {{user.firstName}} {{user.lastName}}</mat-card-subtitle>
-    </mat-card-header>
-    <img class="img-thumbnail" [src]="user.photoUrl" alt="Facebook Photo">
-  </mat-card>
-</div>
 
-<div class="container" *ngIf="loggedIn===true">
-  <h2 class="text-capitalize">LIVRES SECRETS</h2><p>Seul les utilisateurs authentifiés peuvent voir ceci</p>
-  <ul *ngIf="secretBooks" class="list-inline">
-    <li class="list-inline-item border border-primary" *ngFor="let book of secretBooks">
-      <span class="badge badge-info">{{ book.id }}</span>
-      <div class="text-primary lead">{{ book.name }}</div>
-      <div class="text-warning display-4">{{ book.title }}</div>
-      <div class="font-italic">{{ book.description }}</div>
-    </li>
-  </ul>
 
 </div>
+<!--<div class="container-fluid align-content-start">
+
+</div>-->
 
 <div class="container-fuild principal">
-  <nav class="navbar navbar-expand-lg navbar-light"> </nav>
+  <nav class="navbar navbar-expand-lg navbar-light"></nav>
   <app-book [loggedIn]="loggedIn"></app-book>
 </div>
 

@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
+import { FormControl } from '@angular/forms';
 
-import {BOOKS} from "../mock-books";
+import {BOOKS, SECRETBOOKS} from "../mock-books";
 import {Book} from "../book";
 import {SocialUser} from "angularx-social-login";
 
@@ -11,11 +12,16 @@ import {SocialUser} from "angularx-social-login";
 })
 export class BookComponent implements OnInit {
 
-  titlePage: string = "Acceuil Général - Livres";
   books: Book[] = BOOKS;
+  secretBooks: Book[] = SECRETBOOKS;
   selectedBook: Book;
   @Input() user: SocialUser;
   @Input() loggedIn: boolean;
+  newName = new FormControl('');
+  newTitle = new FormControl('');
+  newID = new FormControl('');
+  newRef = new FormControl('');
+  newDescription = new FormControl('');
 
   constructor() { }
 
@@ -26,13 +32,29 @@ export class BookComponent implements OnInit {
     this.selectedBook = Book;
   }
 
-  createBook(){
+  onDelete(Book){
+    BOOKS.splice(BOOKS.indexOf(Book),1);
+  }
+
+  onSecretDelete(Book){
+    SECRETBOOKS.splice(SECRETBOOKS.indexOf(Book),1);
+  }
+
+  createBook(newID: string, newName: string, newTitle: string, newRef: string, newDescription: string){
    let book = new Book();
-   book.title = "Créer par bouton";
-   book.name = "PlaceholderName";
-   book.description = "PlaceholderDescription";
-   book.id = "UneIDIncrémentale";
-   book.ref = "UneRefTemporaire";
+   book.title = this.newTitle.value;
+   book.name = this.newName.value;
+   book.description = this.newDescription.value;
+   book.id = this.newID.value;
+   book.ref = this.newRef.value;
    this.books.push(book);
+  }
+
+  editBook(selectedBook : Book, newID: string,newName: string,newTitle: string,newRef: string,newDescription: string){
+  selectedBook.id = this.newID.value;
+  selectedBook.name = this.newName.value;
+  selectedBook.title = this.newTitle.value;
+  selectedBook.ref = this.newRef.value;
+  selectedBook.description = this.newDescription.value;
   }
 }

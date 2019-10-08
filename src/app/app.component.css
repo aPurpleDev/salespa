@@ -1,7 +1,7 @@
 .example-container {
   position: relative;
   padding: 5px;
-  background-color: aqua;
+  background-color: lightgoldenrodyellow;
 }
 
 .example-loading-shade {
@@ -20,4 +20,14 @@
 .example-card {
   margin: 5px;
   padding-bottom: 40px;
+  background-color: lightblue;
+  background-image:url('https://thewallpaper.co//wp-content/uploads/2016/10preview/free-images-book-wallpapers-hd-full-hd-download-high-definiton-wallpapers-desktop-images-windows-10-backgrounds-colourful-hi-res-cool-artwork-2560x1600.jpg');
+  background-repeat:no-repeat;
+  background-size:contain;
+  background-position:right;
 }
+
+.btn-space {
+  margin-right: 5px;
+}
+

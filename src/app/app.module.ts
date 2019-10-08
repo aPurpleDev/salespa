@@ -11,6 +11,7 @@ import { BookdetailsComponent } from './bookdetails/bookdetails.component';
 import { SearchComponent } from './search/search.component';
 import {RouterModule, Routes} from "@angular/router";
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ReactiveFormsModule } from '@angular/forms';
 
 const booksRoutes : Routes = [];
 const config = new AuthServiceConfig([
@@ -39,7 +40,8 @@ export function provideConfig() {
     BrowserAnimationsModule,
     MatIconModule,
     MatButtonModule,
-    MatCardModule
+    MatCardModule,
+    ReactiveFormsModule
   ],
   providers: [
     {

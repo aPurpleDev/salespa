@@ -1,11 +1,17 @@
-<form class="form-inline my-2 my-lg-0" (ngSubmit)="onSubmit(formSearch)" #formSearch="ngForm">
-  <input name="word" ngModel required  class="form-control mr-sm-2" type="search" placeholder="Recherche" aria-label="Recherche">
-  <button [disabled]="formSearch.invalid" class="btn btn-outline-success my-2 my-sm-0" type="submit">Recherche</button>
+<form class="form-inline my-2 my-lg-0 mt-0" (ngSubmit)="onSubmit(formSearch)" #formSearch="ngForm">
+  <input name="word" ngModel required  class="form-control mr-sm-2" type="search" placeholder="Chercher un titre.." aria-label="Recherche">
+  <button [disabled]="formSearch.invalid" class="btn btn-success my-2 my-sm-0" type="submit">Trouver</button>
 </form>
-<div class="container" *ngIf="result">
-  <div class="justify-content-center">
-    <h5 class="text-center text-danger">Résultat de la recherche pour {{formSearch.value['word']}}</h5>
-    <h5 class="text-center text-success">Un livre trouvé, nom: {{result.title}}, de l'auteur: {{result.name}}.</h5>
+<div *ngIf="result">
+  <div class="alert alert-success" role="alert">
+    Livre {{result.title}} trouvé, de l'auteur {{result.name}}. De référence: {{result.ref}}, cette oeuvre dont l'ID est {{result.id}} est présentée ainsi: "{{result.description}}"
   </div>
+  <!--<div class="justify-content-center">
+    <h5 class="text-center text-danger">Résultat de la recherche pour {{formSearch.value['word']}}</h5>
+    <h5 class="text-center text-success">Un livre trouvé de l'auteur: {{result.name}}.</h5>
+    <h3 class="text-center text-success">Titre du livre: {{result.title}}</h3>
+    <h3 class="text-center text-success">Référence: {{result.ref}}</h3>
+    <h3 class="text-center text-success">Description: {{result.description}}</h3>
+  </div>-->
 </div>
-<div class="container" *ngIf="!result && formSearch.value['word']">Aucun résultat trouvé pour la recherche</div>
+<div class="container" *ngIf="!result && formSearch.value['word']"><div class="alert alert-danger" role="alert">Aucun résultat trouvé pour la recherche</div></div>

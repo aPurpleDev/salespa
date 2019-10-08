@@ -1,32 +1,94 @@
-<h6 class="text-info text-center display-1">{{ titlePage }}</h6>
-
-<div  class="container align-content-center">
-  <app-search></app-search>
-</div>
-
-<div class="container border border-warning" *ngIf="selectedBook">
- <div class="justify-content-center">
-    <h5 class="text-center text-danger">En savoir plus sur: {{selectedBook.title}}</h5>
-    <h5 class="text-center text-success">Nom de l'auteur: {{selectedBook.name}}, Description: {{selectedBook.description}}.</h5>
+<div class="alert alert-success" *ngIf="selectedBook">
+    <h5 class="text-center text-info">A propos de: "{{selectedBook.title}}"</h5>
+    <h5 class="text-center text-dark">Nom de l'auteur: {{selectedBook.name}},
+      Description: {{selectedBook.description}} Référence: {{selectedBook.ref}}.</h5>
+    <div class="container content-center" *ngIf="loggedIn===true">
+      <h5 class="text-center text-danger">Editer le livre ci-dessous si vous le souhaitez</h5>
+      <label>
+        Editer l'ID:
+        <input type="text" [formControl]="newID" placeholder="{{selectedBook.id}}">
+        Editer le nom:
+        <input type="text" [formControl]="newName" placeholder="{{selectedBook.name}}">
+        Editer le titre:
+        <input type="text" [formControl]="newTitle" placeholder="{{selectedBook.title}}">
+        Editer la référence:
+        <input type="text" [formControl]="newRef" placeholder="{{selectedBook.ref}}">
+        Editer la description:
+        <input type="text" [formControl]="newDescription" placeholder="{{selectedBook.description}}">
+      </label>
+      <div class="btn btn-dark btn-sm text-success btn-center"
+           (click)="editBook(selectedBook,newID,newName,newTitle,newRef,newDescription)">Editer la sélection
+      </div>
   </div>
   <app-bookdetails></app-bookdetails>
 </div>
 
-<div class="container">
-  <ul *ngIf="books" class="list-inline">
-    <li class="list-inline-item border border-primary" *ngFor="let book of books">
-      <span class="badge badge-info">{{ book.id }}</span>
-      <div class="text-primary lead">{{ book.name }}</div>
-      <div class="text-warning display-4">{{ book.title }}</div>
-      <div class="font-italic">{{ book.description }}</div>
-      <div class="card btn-dark btn-sm text-success" (click)="onSelect(book)">Sélectionner</div>
-    </li>
-  </ul>
-
-  <div  class="col-sm-4 video">
-    <div class="container" *ngIf="loggedIn===true">
-      <div class="card btn-dark btn-sm text-success" (click)="createBook()">Créer un nouveau Livre.</div>
-    </div>
-    <app-bookdetails [book]="selectedBook"></app-bookdetails>
+<div class="container-fluid" *ngIf="loggedIn===true">
+  <div class="jumbotron" style="background-color: lightpink !important" *ngFor="let book of secretBooks">
+    <h1 class="display-4">Exclusif: {{book.title}}</h1>
+    <h4 class="display-5">{{book.name}}</h4>
+    <p class="lead">{{book.description}}</p>
+    <hr class="my-4">
+    <p>{{book.ref}}</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg btn-space" (click)="onSelect(book)">Sélectionner</a>
+      <a class="btn btn-primary btn-lg btn-space" (click)="onSecretDelete(book)">Supprimer</a>
+    </p>
   </div>
 </div>
+
+<app-bookdetails [book]="selectedBook"></app-bookdetails>
+
+<div class="container align-content-center">
+</div>
+
+
+<div class="container-fluid">
+  <div class="jumbotron border border-info" style="background-color: lightgoldenrodyellow !important"
+       *ngFor="let book of books">
+    <h3 class="display-4">Disponible:
+      <div class="text-secondary">{{book.title}}</div>
+    </h3>
+    <h4 class="display-5">{{book.name}}</h4>
+    <p class="lead">{{book.description}}</p>
+    <hr class="my-4">
+    <p>{{book.ref}}</p>
+    <p class="lead">
+      <a class="btn btn-primary btn-lg btn-space" (click)="onSelect(book)">Sélectionner</a>
+      <a class="btn btn-primary btn-lg btn-space" *ngIf="loggedIn===true"
+         (click)="editBook(selectedBook,newID,newName,newTitle,newRef,newDescription)">Editer</a>
+      <a class="btn btn-primary btn-lg btn-space" *ngIf="loggedIn===true" (click)="onDelete(book)">Supprimer</a>
+    </p>
+  </div>
+</div>
+
+<div class="card align-content-center" *ngIf="loggedIn===true">
+  <form>
+    <div class="form-group form-horizontal">
+      <label>ID</label>
+      <input type="text" [formControl]="newID">
+    </div>
+    <div class="form-group">
+      <label>Nom</label>
+      <input type="text" [formControl]="newName">
+    </div>
+    <div class="form-group">
+      <label>Titre</label>
+      <input type="text" [formControl]="newTitle">
+    </div>
+    <div class="form-group">
+      <label>Référence</label>
+      <input type="text" [formControl]="newRef">
+    </div>
+    <div class="form-group">
+      <label>Description</label>
+      <input type="text" [formControl]="newDescription">
+    </div>
+    <button type="submit" class="btn btn-success" (click)="createBook(newID,newName,newTitle,newRef,newDescription)">
+      Ajouter un nouveau livre
+    </button>
+  </form>
+</div>
+
+
+
